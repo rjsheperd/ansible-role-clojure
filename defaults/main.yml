@@ -1,0 +1,9 @@
+---
+clojure_install_path: "/usr/local/lib/clojure"
+clojure_version: "1.9.0.381"
+
+clojure_install_workdir: "/tmp"
+clojure_install_script_name: "linux-install-{{ clojure_version }}.sh"
+
+clojure_download_url: "https://download.clojure.org/install/{{ clojure_install_script_name }}"
+clojure_install_script: "{{ clojure_install_workdir }}/{{ clojure_install_script_name }}"

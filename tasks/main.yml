@@ -1,0 +1,31 @@
+---
+- name: Install prerequisites.
+  package:
+    name: "{{ item }}"
+  with_items:
+    - curl
+    - rlwrap
+
+- name: Check if Clojure has been installed already.
+  stat:
+    path: "{{ clojure_install_path }}"
+  register: clojure_install_path_status
+
+- name: Download Clojure.
+  get_url:
+    url: "{{ clojure_download_url }}"
+    dest: "{{ clojure_install_script }}"
+    force: no
+    mode: 0755
+  when: clojure_install_path_status.stat.isdir is not defined
+  register: clojure_download_status
+
+- name: Install Clojure.
+  command: >
+    /bin/bash -c '{{ clojure_install_script }}'
+  when: clojure_download_status.changed
+
+- name: Remove Clojure install script.
+  file:
+    path: "{{ clojure_install_script }}"
+    state: absent
