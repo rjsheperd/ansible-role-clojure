@@ -29,3 +29,10 @@
   file:
     path: "{{ clojure_install_script }}"
     state: absent
+
+- name: Add /usr/local/bin to $PATH
+  lineinfile:
+    path: "/etc/profile.d/clojure.sh"
+    regexp: "^export PATH="
+    line: "export PATH=$PATH:/usr/local/bin"
+    create: True

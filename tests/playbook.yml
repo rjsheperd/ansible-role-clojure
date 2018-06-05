@@ -7,7 +7,8 @@
       changed_when: output.stdout != ""
     - setup: # aka gather_facts
   roles:
+    - role: geerlingguy.repo-epel
     - role: geerlingguy.java
       java_packages:
-        - openjdk-8-jdk
+        - java-1.8.0-openjdk
     - role: clojure
