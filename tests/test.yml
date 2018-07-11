@@ -22,6 +22,13 @@
         java_packages: ["java-1.8.0-openjdk"]
       when: ansible_os_family == 'RedHat'
 
+    - name: Override default JDK (v11) on Ubuntu 18.04
+      set_fact:
+        java_packages: ["openjdk-8-jdk"]
+      when:
+        - ansible_distribution == 'Ubuntu'
+        - ansible_distribution_version == '18.04'
+
   roles:
     - role: geerlingguy.java
     - role: role_under_test
