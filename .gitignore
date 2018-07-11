@@ -1,5 +1,1 @@
-.vagrant/
-tests/roles/*.*
-tests/ubuntu-*-cloudimg-console.log
-
-*.retry
+tests/test.sh
