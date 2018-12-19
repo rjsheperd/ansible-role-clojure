@@ -1,31 +1,33 @@
 ---
-- name: Install prerequisites.
+- name: Install prerequisites
   package:
     name: "{{ item }}"
   with_items:
     - curl
     - rlwrap
 
-- name: Check if Clojure has been installed already.
+- name: Check if Clojure has been installed already
   stat:
     path: "{{ clojure_install_path }}"
   register: clojure_install_path_status
 
-- name: Download Clojure.
+- name: Download Clojure
   get_url:
     url: "{{ clojure_download_url }}"
     dest: "{{ clojure_install_script }}"
-    force: no
+    force: false
     mode: 0755
   when: clojure_install_path_status.stat.isdir is not defined
-  register: clojure_download_status
+  notify:
+    - Install Clojure
+    - Remove Clojure install script
 
-- name: Install Clojure.
-  command: >
-    /bin/bash -c '{{ clojure_install_script }}'
-  when: clojure_download_status.changed
+- name: Ensure Clojure is installed
+  meta: flush_handlers
 
-- name: Remove Clojure install script.
-  file:
-    path: "{{ clojure_install_script }}"
-    state: absent
+- name: Download Leiningen.
+  get_url:
+    url: "{{ lein_download_url }}"
+    dest: "{{ lein_install_path }}"
+    force: false
+    mode: 0755

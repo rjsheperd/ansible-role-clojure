@@ -1,0 +1,17 @@
+---
+- name: Converge
+  hosts: all
+  roles:
+    - role: geerlingguy.repo-epel
+      when: ansible_os_family == "RedHat"
+    - role: geerlingguy.java
+    - role: ansible-role-clojure
+
+  post_tasks:
+    - name: Verify Clojure is installed
+      command: "/usr/local/bin/clj -Sdescribe"
+      changed_when: false
+
+    - name: Verify Leiningen is installed
+      command: "/usr/local/bin/lein --version"
+      changed_when: false

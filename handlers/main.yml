@@ -1,0 +1,9 @@
+---
+- name: Install Clojure
+  command: >
+    /bin/bash -c '{{ clojure_install_script }}'
+
+- name: Remove Clojure install script
+  file:
+    path: "{{ clojure_install_script }}"
+    state: absent
