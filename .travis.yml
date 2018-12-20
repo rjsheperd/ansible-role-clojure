@@ -4,12 +4,9 @@ services: docker
 
 env:
   matrix:
-    - platform_name: centos7
-      platform_image: centos:7
-    - platform_name: ubuntu1804
-      platform_image: ubuntu:18.04
-    - platform_name: ubuntu1604
-      platform_image: ubuntu:16.04
+    - platform_image: centos:7
+    - platform_image: ubuntu:18.04
+    - platform_image: ubuntu:16.04
 
 install:
   - pip install molecule docker
