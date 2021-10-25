@@ -1,5 +1,5 @@
 ---
-clojure_version: "1.9.0.381"
+clojure_version: "1.10.3.986"
 
 clojure_install_path: "/usr/local/lib/clojure"
 

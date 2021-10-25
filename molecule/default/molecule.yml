@@ -3,12 +3,13 @@ dependency:
   name: galaxy
 driver:
   name: docker
-lint:
-  name: yamllint
+lint: |
+  set -e
+  yamllint .
 platforms:
   - name: instance
     image: ${platform_image:-"centos:7"}
 provisioner:
   name: ansible
-  lint:
-    name: ansible-lint
+verifier:
+  name: ansible
