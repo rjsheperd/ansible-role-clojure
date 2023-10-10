@@ -7,6 +7,11 @@
     - role: geerlingguy.java
     - role: ansible-role-clojure
 
+  pre_tasks:
+    - name: Update Debian repos
+      apt: update_cache=yes
+      when: ansible_os_family == "Debian"
+
   post_tasks:
     - name: Verify Clojure is installed
       command: "/usr/local/bin/clj -Sdescribe"

@@ -8,7 +8,8 @@ lint: |
   yamllint .
 platforms:
   - name: instance
-    image: ${platform_image:-"centos:7"}
+    image: "geerlingguy/docker-${MOLECULE_DISTRO:-centos7}-ansible:latest"
+    pre_build_image: true
 provisioner:
   name: ansible
 verifier:
